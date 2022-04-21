@@ -6,6 +6,8 @@ import { AddAuction } from './AddAuction';
 import { AuctionCard } from './AuctionCard';
 import { ProgressBar } from './ProgressBar';
 
+console.log('Jorge', process.env.EACT_USER_ID);
+
 export const AuctionBody = () => {
   const [auction, setAuction] = useState(null);
   const { currentUser, globalMsg } = useContext(AuthContext);

@@ -7,6 +7,9 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [globalMsg, setGlobalMsg] = useState('');
 
+  const bidIncrement = [1, 2, 5, 10];
+  let i = 0;
+
   const register = (email, password) => {
     return authApp.createUserWithEmailAndPassword(email, password);
   };
@@ -24,10 +27,25 @@ export const AuthProvider = ({ children }) => {
       return setGlobalMsg('Please login first');
     }
 
-    let newPrice = Math.floor((price / 100) * 110);
+    if (price < 5) {
+      price = price + bidIncrement[0];
+      i = 0;
+    } else if (price > 8 && price < 15) {
+      price = price + bidIncrement[1];
+      i = 1;
+    } else if (price > 14 && price < 25) {
+      price = price + bidIncrement[2];
+      i = 2;
+    } else if (price > 24) {
+      price = price + bidIncrement[3];
+      i = 3;
+    }
+
+    let newPrice = Math.floor(price);
     const db = firestoreApp.collection('auctions');
 
     return db.doc(auctionId).update({
+      curBid: bidIncrement[i],
       curPrice: newPrice,
       curWinner: currentUser.email,
     });

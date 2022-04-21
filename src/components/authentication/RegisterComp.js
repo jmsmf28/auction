@@ -48,10 +48,10 @@ export const RegisterComp = () => {
           </Modal.Header>
           <Modal.Body>
             {error && <Alert variant="danger">{error}</Alert>}
-            <Form.Group>
+            {/*<Form.Group>
               <Form.Label>Name</Form.Label>
               <Form.Control type="text" required ref={nameRef} />
-            </Form.Group>
+              </Form.Group>*/}
             <Form.Group>
               <Form.Label>Email Address</Form.Label>
               <Form.Control type="email" required ref={emailRef} />
